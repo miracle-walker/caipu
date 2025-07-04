@@ -1,307 +1,309 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>俺家家常菜馆</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+	<meta charset="utf-8" />
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<title>俺家家常菜馆</title>
+	<style>
+		* {
+		    margin: 0;
+		    padding: 0;
+		    box-sizing: border-box;
+		}
+		
+		body {
+		    font-family: 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+		    background: linear-gradient(135deg, #f5f1eb 0%, #ede5d8 100%);
+		    color: #333;
+		    line-height: 1.6;
+		    min-height: 100vh;
+		}
+		
+		.menu-container {
+		    max-width: 1400px;
+		    margin: 0 auto;
+		    padding: 40px 20px;
+		    position: relative;
+		}
+		
+		.menu-header {
+		    text-align: center;
+		    margin-bottom: 60px;
+		    position: relative;
+		}
+		
+		.logo {
+		    width: 150px;
+		    height: 150px;
+		    margin: 0 auto 30px;
+		    border-radius: 50%;
+		    background: white;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+		    position: relative;
+		    overflow: hidden;
+		}
+		
+		.logo::before {
+		    content: '';
+		    position: absolute;
+		    width: 120px;
+		    height: 120px;
+		    border: 2px dotted #666;
+		    border-radius: 50%;
+		}
+		
+		.logo-icon {
+		    font-size: 48px;
+		    color: #333;
+		    transform: rotate(45deg);
+		}
+		
+		.logo-text {
+		    position: absolute;
+		    bottom: 20px;
+		    font-style: italic;
+		    font-size: 24px;
+		    color: #333;
+		    font-weight: 300;
+		}
+		
+		.restaurant-title {
+		    font-size: 2.5em;
+		    color: #2c3e50;
+		    margin-bottom: 10px;
+		    font-weight: 300;
+		    letter-spacing: 2px;
+		}
+		
+		.menu-grid {
+		    display: grid;
+		    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+		    gap: 30px;
+		    margin-bottom: 40px;
+		}
+		
+		.menu-section {
+		    background: rgba(255, 255, 255, 0.9);
+		    border-radius: 20px;
+		    padding: 30px;
+		    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+		    backdrop-filter: blur(10px);
+		    border: 1px solid rgba(255,255,255,0.2);
+		    transition: all 0.3s ease;
+		    position: relative;
+		    overflow: hidden;
+		}
+		
+		.menu-section::before {
+		    content: '';
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    right: 0;
+		    height: 4px;
+		    background: linear-gradient(90deg, #e74c3c, #f39c12, #27ae60, #3498db);
+		    opacity: 0;
+		    transition: opacity 0.3s ease;
+		}
+		
+		.menu-section:hover {
+		    transform: translateY(-5px);
+		    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+		}
+		
+		.menu-section:hover::before {
+		    opacity: 1;
+		}
+		
+		.section-title {
+		    font-size: 1.8em;
+		    color: #2c3e50;
+		    margin-bottom: 25px;
+		    text-align: center;
+		    position: relative;
+		    padding-bottom: 15px;
+		}
+		
+		.section-title::after {
+		    content: '';
+		    position: absolute;
+		    bottom: 0;
+		    left: 50%;
+		    transform: translateX(-50%);
+		    width: 60px;
+		    height: 2px;
+		    background: linear-gradient(90deg, #e74c3c, #f39c12);
+		    border-radius: 2px;
+		}
+		
+		.menu-item {
+		    padding: 12px 0;
+		    border-bottom: 1px solid #eee;
+		    transition: all 0.3s ease;
+		    position: relative;
+		    cursor: pointer;
+		}
+		
+		.menu-item:last-child {
+		    border-bottom: none;
+		}
+		
+		.menu-item:hover {
+		    background: rgba(52, 152, 219, 0.05);
+		    padding-left: 15px;
+		    padding-right: 15px;
+		    border-radius: 8px;
+		    transform: translateX(5px);
+		    border-bottom: 1px solid transparent;
+		}
+		
+		.item-name {
+		    font-size: 1.1em;
+		    color: #34495e;
+		    font-weight: 500;
+		    position: relative;
+		}
+		
+		.item-name::before {
+		    content: '•';
+		    color: #e74c3c;
+		    font-weight: bold;
+		    margin-right: 8px;
+		    opacity: 0;
+		    transition: opacity 0.3s ease;
+		}
+		
+		.menu-item:hover .item-name::before {
+		    opacity: 1;
+		}
+		
+		.special-section {
+		    background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(243, 156, 18, 0.1) 100%);
+		    border: 2px solid rgba(231, 76, 60, 0.2);
+		}
+		
+		.experimental-section {
+		    background: linear-gradient(135deg, rgba(155, 89, 182, 0.1) 0%, rgba(52, 152, 219, 0.1) 100%);
+		    border: 2px solid rgba(155, 89, 182, 0.3);
+		    position: relative;
+		}
+		
+		.experimental-section::after {
+		    content: '新品';
+		    position: absolute;
+		    top: 15px;
+		    right: 15px;
+		    background: linear-gradient(45deg, #9b59b6, #3498db);
+		    color: white;
+		    padding: 5px 12px;
+		    border-radius: 15px;
+		    font-size: 0.8em;
+		    font-weight: 600;
+		}
+		
+		.stir-fry-section {
+		    grid-column: 1 / -1;
+		    background: linear-gradient(135deg, rgba(46, 204, 113, 0.1) 0%, rgba(26, 188, 156, 0.1) 100%);
+		    border: 2px solid rgba(46, 204, 113, 0.2);
+		}
+		
+		.stir-fry-section2 {
+		    grid-column: 1 / -1;
+		    background-color: #fef7e0; /* 柔和米黄色或淡橙色 */
+		    border: 2px solid rgba(46, 204, 113, 0.2);
+		}
+		
+		.stir-fry-grid {
+		    display: grid;
+		    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		    gap: 10px;
+		}
+		
+		.floating-elements {
+		    position: fixed;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		    pointer-events: none;
+		    z-index: -1;
+		}
+		
+		.floating-circle {
+		    position: absolute;
+		    border-radius: 50%;
+		    background: rgba(255, 255, 255, 0.1);
+		    animation: float 6s ease-in-out infinite;
+		}
+		
+		.floating-circle:nth-child(1) {
+		    width: 100px;
+		    height: 100px;
+		    top: 20%;
+		    left: 10%;
+		    animation-delay: 0s;
+		}
+		
+		.floating-circle:nth-child(2) {
+		    width: 150px;
+		    height: 150px;
+		    top: 60%;
+		    right: 15%;
+		    animation-delay: 2s;
+		}
+		
+		.floating-circle:nth-child(3) {
+		    width: 80px;
+		    height: 80px;
+		    bottom: 20%;
+		    left: 20%;
+		    animation-delay: 4s;
+		}
+		
+		@keyframes float {
+		    0%, 100% { transform: translateY(0px) rotate(0deg); }
+		    50% { transform: translateY(-20px) rotate(180deg); }
+		}
+		
+		.category-icon {
+		    font-size: 1.2em;
+		    margin-right: 8px;
+		    opacity: 0.7;
+		}
+		
+		@media (max-width: 768px) {
+		    .menu-grid {
+		        grid-template-columns: 1fr;
+		        gap: 20px;
+		    }
+		    
+		    .stir-fry-grid {
+		        grid-template-columns: 1fr;
+		    }
+		    
+		    .menu-container {
+		        padding: 20px 15px;
+		    }
+		    
+		    .restaurant-title {
+		        font-size: 2em;
+		    }
+		    
+		    .logo {
+		        width: 120px;
+		        height: 120px;
+		    }
+		}
+		.item-link {
+            text-decoration: none;
+            color: inherit;
         }
 
-        body {
-            font-family: 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
-            background: linear-gradient(135deg, #f5f1eb 0%, #ede5d8 100%);
-            color: #333;
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        .menu-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            position: relative;
-        }
-
-        .menu-header {
-            text-align: center;
-            margin-bottom: 60px;
-            position: relative;
-        }
-
-        .logo {
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 30px;
-            border-radius: 50%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .logo::before {
-            content: '';
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            border: 2px dotted #666;
-            border-radius: 50%;
-        }
-
-        .logo-icon {
-            font-size: 48px;
-            color: #333;
-            transform: rotate(45deg);
-        }
-
-        .logo-text {
-            position: absolute;
-            bottom: 20px;
-            font-style: italic;
-            font-size: 24px;
-            color: #333;
-            font-weight: 300;
-        }
-
-        .restaurant-title {
-            font-size: 2.5em;
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-weight: 300;
-            letter-spacing: 2px;
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .menu-section {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .menu-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #e74c3c, #f39c12, #27ae60, #3498db);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .menu-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-        }
-
-        .menu-section:hover::before {
-            opacity: 1;
-        }
-
-        .section-title {
-            font-size: 1.8em;
-            color: #2c3e50;
-            margin-bottom: 25px;
-            text-align: center;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 2px;
-            background: linear-gradient(90deg, #e74c3c, #f39c12);
-            border-radius: 2px;
-        }
-
-        .menu-item {
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
-            transition: all 0.3s ease;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .menu-item:last-child {
-            border-bottom: none;
-        }
-
-        .menu-item:hover {
-            background: rgba(52, 152, 219, 0.05);
-            padding-left: 15px;
-            padding-right: 15px;
-            border-radius: 8px;
-            transform: translateX(5px);
-            border-bottom: 1px solid transparent;
-        }
-
-        .item-name {
-            font-size: 1.1em;
-            color: #34495e;
-            font-weight: 500;
-            position: relative;
-        }
-
-        .item-name::before {
-            content: '•';
-            color: #e74c3c;
-            font-weight: bold;
-            margin-right: 8px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .item-link {
-    text-decoration: none;
-    color: inherit;
-}
-.item-link:hover {
-    text-decoration: underline; /* 可选：鼠标悬停时显示下划线 */
-}
-        .menu-item:hover .item-name::before {
-            opacity: 1;
-        }
-
-        .special-section {
-            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(243, 156, 18, 0.1) 100%);
-            border: 2px solid rgba(231, 76, 60, 0.2);
-        }
-
-        .experimental-section {
-            background: linear-gradient(135deg, rgba(155, 89, 182, 0.1) 0%, rgba(52, 152, 219, 0.1) 100%);
-            border: 2px solid rgba(155, 89, 182, 0.3);
-            position: relative;
-        }
-
-        .experimental-section::after {
-            content: '新品';
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: linear-gradient(45deg, #9b59b6, #3498db);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            font-weight: 600;
-        }
-
-        .stir-fry-section {
-            grid-column: 1 / -1;
-            background: linear-gradient(135deg, rgba(46, 204, 113, 0.1) 0%, rgba(26, 188, 156, 0.1) 100%);
-            border: 2px solid rgba(46, 204, 113, 0.2);
-        }
-
-        .stir-fry-section2 {
-            grid-column: 1 / -1;
-            background-color: #fef7e0; /* 柔和米黄色或淡橙色 */
-            border: 2px solid rgba(46, 204, 113, 0.2);
-        }
-
-        .stir-fry-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-        }
-
-        .floating-elements {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .floating-circle {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .floating-circle:nth-child(1) {
-            width: 100px;
-            height: 100px;
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .floating-circle:nth-child(2) {
-            width: 150px;
-            height: 150px;
-            top: 60%;
-            right: 15%;
-            animation-delay: 2s;
-        }
-
-        .floating-circle:nth-child(3) {
-            width: 80px;
-            height: 80px;
-            bottom: 20%;
-            left: 20%;
-            animation-delay: 4s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-
-        .category-icon {
-            font-size: 1.2em;
-            margin-right: 8px;
-            opacity: 0.7;
-        }
-
-        @media (max-width: 768px) {
-            .menu-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .stir-fry-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .menu-container {
-                padding: 20px 15px;
-            }
-            
-            .restaurant-title {
-                font-size: 2em;
-            }
-            
-            .logo {
-                width: 120px;
-                height: 120px;
-            }
+        .item-link:hover {
+            text-decoration: underline;
         }
 
         .badge {
@@ -317,258 +319,253 @@
             transform: scale(1);
         }
 
-
-    </style>
+	</style>
 </head>
 <body>
-    <div class="floating-elements">
-        <div class="floating-circle"></div>
-        <div class="floating-circle"></div>
-        <div class="floating-circle"></div>
-    </div>
-
-    <div class="menu-container">
-        <div class="menu-header">
-            <div class="logo">
-                <div class="logo-icon">🍴</div>
-                <div class="logo-text"></div>
-            </div>
-            <h1 class="restaurant-title">俺家家常菜</h1>
-        </div>
-
-        <div class="menu-grid">
-            
-            <div class="menu-section stir-fry-section2">
-                <h2 class="section-title"><span class="category-icon">🔥</span>特色菜品</h2>
-                <div class="stir-fry-grid">
+	<div class="floating-elements">
+		<div class="floating-circle"></div>
+		<div class="floating-circle"></div>
+		<div class="floating-circle"></div>
+	</div>
+	<div class="menu-container">
+		<div class="menu-header">
+			<div class="logo">
+				<div class="logo-icon">🍴</div>
+				<div class="logo-text"></div>
+			</div>
+			<h1 class="restaurant-title">俺家家常菜</h1>
+		</div>
+		<div class="menu-grid">
+			<div class="menu-section stir-fry-section2">
+				<h2 class="section-title"><span class="category-icon">🔥</span>特色菜品</h2>
+				<div class="stir-fry-grid">
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E5%B9%B2%E9%94%85%E5%A4%A7%E8%99%BE&amp;bvid=BV1cE411h7ff">干锅大虾</a><span class="badge">招牌</span></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E5%B9%B2%E9%94%85%E5%9C%9F%E8%B1%86&amp;bvid=BV1ZZ4y1A7HK">干锅土豆</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E5%B9%B2%E9%94%85%E8%8A%B1%E8%8F%9C&amp;bvid=BV1kx411D7V8">干锅花菜</a><span class="badge">精品</span></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E5%B9%B2%E9%94%85%E9%B8%A1%E7%BF%85&amp;bvid=BV1YiEWzDEZi">干锅鸡翅</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E9%85%B8%E6%B1%A4%E8%82%A5%E7%89%9B&amp;bvid=BV1ho4y1P7yx">酸汤肥牛</a><span class="badge">热门</span></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E7%99%BD%E7%81%BC%E5%A4%A7%E8%99%BE&amp;bvid=BV1eT4y157of">白灼大虾</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E8%8A%A5%E6%9C%AB%E5%A4%A7%E8%99%BE&amp;bvid=BV1hC4y1P7dv">芥末罗氏虾</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E9%A6%99%E8%BE%A3%E8%8A%B1%E7%94%B2&amp;bvid=BV1BYZcYpEQG">香辣花甲</a><span class="badge">下酒</span></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E6%9F%A0%E6%AA%AC%E7%85%8E%E9%B8%A1%E8%85%BF&amp;bvid=BV1c6Jbz7EKd">柠檬煎鸡腿</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E5%B0%96%E6%A4%92%E9%B8%A1&amp;bvid=BV19u41147Lb">尖椒鸡</a><span class="badge">火爆</span></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E5%86%AC%E9%98%B4%E5%8A%9F%E5%B0%8F%E7%81%AB%E9%94%85&amp;bvid=BV1ks411W7RP">冬阴功小火锅</a><span class="badge">泰式</span></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E5%92%96%E5%96%B1%E6%96%99%E7%90%86&amp;bvid=BV1mu411Z7fs">咖喱料理</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E9%9F%A9%E5%BC%8F%E6%8B%8C%E9%A5%AD&amp;bvid=BV17J411B7Fr">韩式拌饭</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E7%94%B5%E9%A5%AD%E9%94%85%E7%84%96%E9%A5%AD&amp;bvid=BV1ww4m1m7xv">电饭锅焖饭</a></span>
+					</div>
+				</div>
+			</div>
+			<div class="menu-section stir-fry-section">
+				<h2 class="section-title"><span class="category-icon">🥘</span>家庭小炒</h2>
+				<div class="stir-fry-grid">
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E5%9C%9F%E8%B1%86%E8%82%89%E4%B8%9D&amp;bvid=BV1uN411m7XM">土豆肉丝</a><span class="badge">经典</span></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E9%9D%92%E6%A4%92%E8%82%89%E4%B8%9D&amp;bvid=BV1xS4y167Qe">青椒肉丝</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E6%A6%A8%E8%8F%9C%E8%82%89%E4%B8%9D&amp;bvid=BV1ae4y1b7XH">榨菜肉丝</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E8%92%9C%E8%8B%94%E8%82%89%E4%B8%9D&amp;bvid=BV1J5oXYYEo6">蒜苔肉丝</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E9%9F%AD%E9%BB%84%E8%82%89%E4%B8%9D&amp;bvid=BV1Kp4y1W71A">韭黄肉丝</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E9%85%B8%E8%BE%A3%E8%82%89%E4%B8%9D&amp;bvid=BV1qD421L7tK">酸辣肉丝</a><span class="badge">招牌</span></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E8%B1%86%E8%8A%BD%E8%82%89%E4%B8%9D&amp;bvid=BV1sX4y1r7nd">豆芽肉丝</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E5%9B%9E%E9%94%85%E8%82%89&amp;bvid=BV1eA4m1L7QY">回锅肉</a><span class="badge">川菜</span></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E6%9D%8F%E9%B2%8D%E8%8F%87%E8%82%89%E7%89%87&amp;bvid=BV1og411h7kh">杏鲍菇肉片</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E9%A6%99%E8%8F%87%E8%82%89%E7%89%87&amp;bvid=BV1yx4y177yZ">香菇肉片</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E9%BB%84%E7%93%9C%E8%82%89%E7%89%87&amp;bvid=BV1Nb411W7JP">黄瓜肉片</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E5%B1%B1%E8%8D%AF%E8%82%89%E7%89%87&amp;bvid=BV1qL411T7Gj">山药肉片</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E8%82%89%E6%B2%AB%E8%8C%84%E5%AD%90&amp;bvid=BV14W421R7kp">肉沫茄子</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E8%82%89%E6%B2%AB%E8%9B%8B%E7%BE%B9&amp;bvid=BV1YM1iYVEJE">肉沫蛋羹</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E8%82%89%E6%B2%AB%E7%B2%89%E6%9D%A1&amp;bvid=BV1J14y117ba">肉沫粉条</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E9%85%B8%E8%BE%A3%E5%9C%9F%E8%B1%86%E4%B8%9D&amp;bvid=BV1554y1f7jK">酸辣土豆丝</a><span class="badge">下饭</span></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E9%85%B1%E9%A6%99%E8%97%95%E4%B8%81&amp;bvid=BV1xQ4y1e7zp">酱香藕丁</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E6%B2%B9%E6%B8%A3%E8%8E%B2%E7%99%BD&amp;bvid=BV1wf4y1y7ik">油渣莲白</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E8%8E%B2%E7%99%BD%E7%B2%89%E4%B8%9D&amp;bvid=BV1kG41197bp">莲白粉丝</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E9%BA%BB%E5%A9%86%E8%B1%86%E8%85%90&amp;bvid=BV1jV41137Sy">麻婆豆腐</a><span class="badge">川菜</span></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E7%99%BD%E6%B2%B9%E4%B8%9D%E7%93%9C&amp;bvid=BV1dF411W7Ev">白油丝瓜</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E7%82%9D%E7%82%92%E8%B1%86%E8%8A%BD&amp;bvid=BV1aM4m1y7Ta">炝炒豆芽</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E7%95%AA%E8%8C%84%E7%82%92%E8%9B%8B&amp;bvid=BV1SW4y1f7Tc">番茄炒蛋</a><span class="badge">经典</span></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E7%82%92%E6%97%B6%E8%94%AC&amp;bvid=BV1of4y1B7gs">炒时蔬</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E7%82%92%E6%96%B9%E4%BE%BF%E9%9D%A2&amp;bvid=BV1Jw4m1X7kA">炒方便面</a></span>
+					</div>
+					<div class="menu-item">
+						<span class="item-name"><a class="item-link" href="info.html?name=%E5%B9%B2%E7%85%B8%E8%B1%86%E8%A7%92&amp;bvid=BV13D4y1u7TP">干煸豆角</a></span>
+					</div>
                     <div class="menu-item">
-                        <span class="item-name"><a href="info.html?name=干锅大虾&video=https://player.bilibili.com/player.html?bvid=BV1cE411h7ff" class="item-link">干锅大虾</a><span class="badge">招牌</span></span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name"><a href="info.html?name=干锅土豆&video=https://player.bilibili.com/player.html?bvid=BV1ZZ4y1A7HK" class="item-link">干锅土豆</a> </span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">干锅花菜<span class="badge">精品</span></span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">干锅鸡翅</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">酸汤肥牛<span class="badge">热门</span></span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">白灼大虾</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">芥末大虾</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">香辣花甲<span class="badge">下酒</span></span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">柠檬煎鸡腿</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">尖椒鸡</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">冬阴功小火锅<span class="badge">泰式</span></span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">咖喱料理</span>
-                    </div>    
-                    <div class="menu-item">
-                        <span class="item-name">韩式拌饭</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">电饭锅焖饭</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-section stir-fry-section">
-                <h2 class="section-title"><span class="category-icon">🥘</span>家庭小炒</h2>
-                <div class="stir-fry-grid">
-                    <div class="menu-item">
-                        <span class="item-name">土豆肉丝<span class="badge">经典</span></span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">青椒肉丝</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">榨菜肉丝</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">蒜苔肉丝</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">韭黄肉丝</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">酸辣肉丝<span class="badge">招牌</span></span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">豆芽肉丝</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">回锅肉<span class="badge">川菜</span></span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">杏鲍菇肉片</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">香菇肉片</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">黄瓜肉片</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">山药肉片</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">肉沫茄子</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">肉沫蛋羹</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">肉沫粉条</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">酸辣土豆丝<span class="badge">下饭</span></span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">酱香藕丁</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">油渣莲白</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">莲白粉丝</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">麻婆豆腐<span class="badge">川菜</span></span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">白油丝瓜</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">炝炒豆芽</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">番茄炒蛋<span class="badge">经典</span></span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">炒时蔬</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">炒方便面</span>
-                    </div>
-                    <div class="menu-item">
-                        <span class="item-name">干煸豆角</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-section">
-                <h2 class="section-title"><span class="category-icon">🍲</span>汤</h2>
+						<span class="item-name"><a class="item-link" href="info.html?name=%E5%B9%B2%E7%85%B8%E8%B1%86%E8%A7%92&amp;bvid=BV1WM4y1r75J">酸豇豆肉沫</a><span class="badge">下饭</span></span>
+					</div>
+				</div>
+			</div>
+			<div class="menu-section">
+				<h2 class="section-title"><span class="category-icon">🍲</span>汤</h2>
+				<div class="menu-item">
+					<span class="item-name"><a class="item-link" href="info.html?name=%E7%95%AA%E8%8C%84%E7%85%8E%E8%9B%8B%E6%B1%A4&amp;bvid=BV174411j7km">番茄煎蛋汤</a></span>
+				</div>
+				<div class="menu-item">
+					<span class="item-name"><a class="item-link" href="info.html?name=%E7%9A%AE%E8%9B%8B%E9%BB%84%E7%93%9C%E6%B1%A4&amp;bvid=BV1Nr4y1s7WQ">皮蛋黄瓜汤</a></span>
+				</div>
+				<div class="menu-item">
+					<span class="item-name"><a class="item-link" href="info.html?name=%E4%B8%9D%E7%93%9C%E8%82%89%E7%89%87%E6%B1%A4&amp;bvid=BV1SB4y1t7rr">丝瓜肉片汤</a></span>
+				</div>
+				<div class="menu-item">
+					<span class="item-name"><a class="item-link" href="info.html?name=%E4%B8%89%E9%B2%9C%E6%B1%A4&amp;bvid=BV15u411L7jv">三鲜汤</a><span class="badge">营养</span></span>
+				</div>
+				<div class="menu-item">
+					<span class="item-name"><a class="item-link" href="info.html?name=%E9%B2%AB%E9%B1%BC%E6%B1%A4&amp;bvid=BV1S5411y7Cc">鲫鱼汤</a><span class="badge">滋补</span></span>
+				</div>
+				<div class="menu-item">
+					<span class="item-name"><a class="item-link" href="info.html?name=%E7%B4%AB%E8%8F%9C%E8%9B%8B%E8%8A%B1%E6%B1%A4&amp;bvid=BV1ct4y1H7sh">紫菜蛋花汤</a></span>
+				</div>
+				<div class="menu-item">
+					<span class="item-name"><a class="item-link" href="info.html?name=%E5%86%AC%E7%93%9C%E5%9C%86%E5%AD%90%E6%B1%A4&amp;bvid=BV1er4y137G6">冬瓜圆子汤</a></span>
+				</div>
+				<div class="menu-item">
+					<span class="item-name"><a class="item-link" href="info.html?name=%E7%8E%89%E7%B1%B3%E6%8E%92%E9%AA%A8%E6%B1%A4&amp;bvid=BV1JA4y1f7zk">玉米排骨汤</a><span class="badge">滋补</span></span>
+				</div>
+				<div class="menu-item">
+					<span class="item-name"><a class="item-link" href="info.html?name=%E8%8A%B8%E8%B1%86%E7%8C%AA%E8%B9%84%E6%B1%A4&amp;bvid=BV1yo4y1b7Aw">芸豆猪蹄汤</a></span>
+				</div>
+			</div>
+			<div class="menu-section">
+				<h2 class="section-title"><span class="category-icon">🥗</span>凉菜</h2>
+				<div class="menu-item">
+					<span class="item-name"><a class="item-link" href="info.html?name=%E5%87%89%E6%8B%8C%E9%BB%84%E7%93%9C&amp;bvid=BV1kA411G7D5">凉拌黄瓜</a><span class="badge">爽口</span></span>
+				</div>
+				<div class="menu-item">
+					<span class="item-name"><a class="item-link" href="info.html?name=%E5%87%89%E6%8B%8C%E7%A7%8B%E8%91%B5&amp;bvid=BV13z4y1D7c5">凉拌秋葵</a></span>
+				</div>
+				<div class="menu-item">
+					<span class="item-name"><a class="item-link" href="info.html?name=%E5%87%89%E6%8B%8C%E4%B8%89%E4%B8%9D&amp;bvid=BV1ku411s7ri">凉拌三丝</a></span>
+				</div>
                 <div class="menu-item">
-                    <span class="item-name">番茄煎蛋汤</span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">皮蛋黄瓜汤</span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">丝瓜肉片汤</span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">三鲜汤<span class="badge">营养</span></span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">鲫鱼汤<span class="badge">滋补</span></span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">紫菜蛋花汤</span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">冬瓜圆子汤</span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">玉米排骨汤<span class="badge">滋补</span></span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">芸豆猪蹄汤</span>
-                </div>
-            </div>
-
-            <div class="menu-section">
-                <h2 class="section-title"><span class="category-icon">🥗</span>凉菜</h2>
-                <div class="menu-item">
-                    <span class="item-name">凉拌黄瓜<span class="badge">爽口</span></span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">凉拌秋葵</span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">凉拌三丝</span>
-                </div>
-            </div>
-
-            
-
-            <div class="menu-section experimental-section">
-                <h2 class="section-title"><span class="category-icon">🧪</span>实验菜谱</h2>
-                <div class="menu-item">
-                    <span class="item-name">三汁焖锅<span class="badge">创新</span></span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">家庭版本烤鱼</span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">干捞粉丝虾滑<span class="badge">限量</span></span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuItems = document.querySelectorAll('.menu-item');
-            
-            menuItems.forEach(item => {
-                item.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateX(5px) scale(1.02)';
-                });
-                
-                item.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateX(0) scale(1)';
-                });
-            });
-
-            // 页面加载动画
-            const sections = document.querySelectorAll('.menu-section');
-            sections.forEach((section, index) => {
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(30px)';
-                
-                setTimeout(() => {
-                    section.style.transition = 'all 0.6s ease';
-                    section.style.opacity = '1';
-                    section.style.transform = 'translateY(0)';
-                }, index * 150);
-            });
-
-            // 随机显示徽章
-            const badges = document.querySelectorAll('.badge');
-            badges.forEach(badge => {
-                if (Math.random() > 0.7) {
-                    setTimeout(() => {
-                        badge.style.opacity = '0.8';
-                        badge.style.transform = 'scale(1)';
-                    }, Math.random() * 2000);
-                }
-            });
-        });
-    </script>
+					<span class="item-name"><a class="item-link" href="info.html?name=%E5%87%89%E6%8B%8C%E4%B8%89%E4%B8%9D&amp;bvid=BV1NZ3xzfEZu">凉拌手撕鸡</a></span>
+				</div>
+			</div>
+			<div class="menu-section experimental-section">
+				<h2 class="section-title"><span class="category-icon">🧪</span>实验菜谱</h2>
+				<div class="menu-item">
+					<span class="item-name"><a class="item-link" href="info.html?name=%E4%B8%89%E6%B1%81%E7%84%96%E9%94%85&amp;bvid=BV1jJ411h7Zc">三汁焖锅</a><span class="badge">创新</span></span>
+				</div>
+				<div class="menu-item">
+					<span class="item-name"><a class="item-link" href="info.html?name=%E5%AE%B6%E5%BA%AD%E7%89%88%E6%9C%AC%E7%83%A4%E9%B1%BC&amp;bvid=BV17Hd2Y6Eba">家庭版本烤鱼</a></span>
+				</div>
+				<div class="menu-item">
+					<span class="item-name"><a class="item-link" href="info.html?name=%E5%B9%B2%E6%8D%9E%E7%B2%89%E4%B8%9D%E8%99%BE%E6%BB%91&amp;bvid=BV1Ys421w7Wo">干捞粉丝虾滑</a><span class="badge">限量</span></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+		    const menuItems = document.querySelectorAll('.menu-item');
+		    
+		    menuItems.forEach(item => {
+		        item.addEventListener('mouseenter', function() {
+		            this.style.transform = 'translateX(5px) scale(1.02)';
+		        });
+		        
+		        item.addEventListener('mouseleave', function() {
+		            this.style.transform = 'translateX(0) scale(1)';
+		        });
+		    });
+		
+		    // 页面加载动画
+		    const sections = document.querySelectorAll('.menu-section');
+		    sections.forEach((section, index) => {
+		        section.style.opacity = '0';
+		        section.style.transform = 'translateY(30px)';
+		        
+		        setTimeout(() => {
+		            section.style.transition = 'all 0.6s ease';
+		            section.style.opacity = '1';
+		            section.style.transform = 'translateY(0)';
+		        }, index * 150);
+		    });
+		
+		    // 随机显示徽章
+		    const badges = document.querySelectorAll('.badge');
+		    badges.forEach(badge => {
+		        if (Math.random() > 0.7) {
+		            setTimeout(() => {
+		                badge.style.opacity = '0.8';
+		                badge.style.transform = 'scale(1)';
+		            }, Math.random() * 2000);
+		        }
+		    });
+		});
+	</script>
 </body>
 </html>
