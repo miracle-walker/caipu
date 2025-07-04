@@ -74,24 +74,24 @@
       ></iframe>
     </div>
 
-    <p>这里可以写这道菜的详细说明、用料、步骤等信息。你也可以拓展为图文菜谱。</p>
+    <p>用心创造美食</p>
 
     <a href="javascript:history.back()" class="back-link">← 返回菜单</a>
   </div>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const name = params.get("name") || "菜名";
-    const videoUrl = params.get("video") || "";
+ <script>
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get("name") || "菜名";
+  const bvid = params.get("bvid");
 
-    document.getElementById("recipe-title").textContent = name;
+  document.getElementById("recipe-title").textContent = name;
 
-    const iframe = document.getElementById("video-frame");
-    if (videoUrl) {
-      iframe.src = videoUrl;
-    } else {
-      iframe.parentElement.style.display = "none";
-    }
-  </script>
+  const iframe = document.getElementById("video-frame");
+  if (bvid) {
+    iframe.src = `https://player.bilibili.com/player.html?bvid=${bvid}`;
+  } else {
+    iframe.parentElement.style.display = "none";
+  }
+</script>
 </body>
 </html>
