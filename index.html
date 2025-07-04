@@ -175,7 +175,13 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-
+        .item-link {
+    text-decoration: none;
+    color: inherit;
+}
+.item-link:hover {
+    text-decoration: underline; /* 可选：鼠标悬停时显示下划线 */
+}
         .menu-item:hover .item-name::before {
             opacity: 1;
         }
@@ -207,6 +213,12 @@
         .stir-fry-section {
             grid-column: 1 / -1;
             background: linear-gradient(135deg, rgba(46, 204, 113, 0.1) 0%, rgba(26, 188, 156, 0.1) 100%);
+            border: 2px solid rgba(46, 204, 113, 0.2);
+        }
+
+        .stir-fry-section2 {
+            grid-column: 1 / -1;
+            background-color: #fef7e0; /* 柔和米黄色或淡橙色 */
             border: 2px solid rgba(46, 204, 113, 0.2);
         }
 
@@ -301,15 +313,11 @@
             font-size: 0.7em;
             font-weight: 600;
             margin-left: 8px;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.3s ease;
-        }
-
-        .menu-item:hover .badge {
             opacity: 1;
             transform: scale(1);
         }
+
+
     </style>
 </head>
 <body>
@@ -329,8 +337,57 @@
         </div>
 
         <div class="menu-grid">
+            
+            <div class="menu-section stir-fry-section2">
+                <h2 class="section-title"><span class="category-icon">🔥</span>特色菜品</h2>
+                <div class="stir-fry-grid">
+                    <div class="menu-item">
+                        <span class="item-name"><a href="info.html?name=干锅大虾&video=https://player.bilibili.com/player.html?bvid=BV1cE411h7ff" class="item-link">干锅大虾</a><span class="badge">招牌</span></span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name"><a href="info.html?name=干锅土豆&video=https://player.bilibili.com/player.html?bvid=BV1ZZ4y1A7HK" class="item-link">干锅土豆</a> </span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">干锅花菜<span class="badge">精品</span></span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">干锅鸡翅</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">酸汤肥牛<span class="badge">热门</span></span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">白灼大虾</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">芥末大虾</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">香辣花甲<span class="badge">下酒</span></span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">柠檬煎鸡腿</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">尖椒鸡</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">冬阴功小火锅<span class="badge">泰式</span></span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">咖喱料理</span>
+                    </div>    
+                    <div class="menu-item">
+                        <span class="item-name">韩式拌饭</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">电饭锅焖饭</span>
+                    </div>
+                </div>
+            </div>
+
             <div class="menu-section stir-fry-section">
-                <h2 class="section-title"><span class="category-icon">🥘</span>炒菜类</h2>
+                <h2 class="section-title"><span class="category-icon">🥘</span>家庭小炒</h2>
                 <div class="stir-fry-grid">
                     <div class="menu-item">
                         <span class="item-name">土豆肉丝<span class="badge">经典</span></span>
@@ -457,51 +514,7 @@
                 </div>
             </div>
 
-            <div class="menu-section special-section">
-                <h2 class="section-title"><span class="category-icon">🔥</span>特色菜</h2>
-                <div class="menu-item">
-                    <span class="item-name">干锅花菜<span class="badge">招牌</span></span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">干锅土豆</span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">干锅大虾<span class="badge">精品</span></span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">干锅鸡翅</span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">酸汤肥牛<span class="badge">热门</span></span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">白灼大虾</span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">芥末大虾</span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">香辣花甲<span class="badge">下酒</span></span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">柠檬煎鸡腿</span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">尖椒鸡</span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">冬阴功小火锅<span class="badge">泰式</span></span>
-                </div>
-                 <div class="menu-item">
-                    <span class="item-name">咖喱料理</span>
-                </div>    
-                 <div class="menu-item">
-                    <span class="item-name">韩式拌饭</span>
-                </div>
-                <div class="menu-item">
-                    <span class="item-name">电饭锅焖饭</span>
-                </div>
-            </div>
+            
 
             <div class="menu-section experimental-section">
                 <h2 class="section-title"><span class="category-icon">🧪</span>实验菜谱</h2>
