@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>菜谱详情</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: 'Microsoft YaHei', sans-serif;
+      background: #fafafa;
+      color: #333;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    h1 {
+      font-size: 2em;
+      color: #e67e22;
+      margin-bottom: 20px;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #3498db;
+      font-size: 0.9em;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="recipe-title">菜名</h1>
+
+    <div class="video-container">
+      <iframe id="video-frame"
+              src=""
+              frameborder="0"
+              allowfullscreen
+              scrolling="no"
+              allow="autoplay; fullscreen"
+      ></iframe>
+    </div>
+
+    <p>这里可以写这道菜的详细说明、用料、步骤等信息。你也可以拓展为图文菜谱。</p>
+
+    <a href="javascript:history.back()" class="back-link">← 返回菜单</a>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name") || "菜名";
+    const videoUrl = params.get("video") || "";
+
+    document.getElementById("recipe-title").textContent = name;
+
+    const iframe = document.getElementById("video-frame");
+    if (videoUrl) {
+      iframe.src = videoUrl;
+    } else {
+      iframe.parentElement.style.display = "none";
+    }
+  </script>
+</body>
+</html>
